@@ -7,6 +7,10 @@ include(LibraryTools)
 hunter_add_package(intx)
 find_package(intx CONFIG REQUIRED)
 
+SET(CMAKE_BUILD_TYPE "Debug")  
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")  
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")  
+
 add_library(evmone
     ${include_dir}/evmone/evmone.h
     advanced_analysis.cpp
@@ -60,3 +64,5 @@ endif()
 set_source_files_properties(vm.cpp PROPERTIES COMPILE_DEFINITIONS PROJECT_VERSION="${PROJECT_VERSION}")
 
 add_standalone_library(evmone)
+
+

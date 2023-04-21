@@ -11,7 +11,8 @@
 #include <evmone/evmone.h>
 #include <cassert>
 #include <iostream>
-
+#include <ethash/keccak.hpp>
+#include <intx/intx.hpp>
 namespace evmone
 {
 namespace
@@ -82,4 +83,9 @@ EVMC_EXPORT evmc_vm* evmc_create_evmone() noexcept
 {
     return new evmone::VM{};
 }
+}
+std::string keccak256(const uint8_t *data, uint32_t size)
+{
+    intx::uint256 Hash = intx::be::load<intx::uint256>(ethash::keccak256(data, size));
+    return intx::hex<256>(Hash);
 }

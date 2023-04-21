@@ -143,7 +143,7 @@ endfunction()
 
 # Set HUNTER_GATE_ROOT cmake variable to suitable value.
 function(hunter_gate_detect_root)
-  # Check CMake variable
+  # Check CMake variable1
   string(COMPARE NOTEQUAL "${HUNTER_ROOT}" "" not_empty)
   if(not_empty)
     set(HUNTER_GATE_ROOT "${HUNTER_ROOT}" PARENT_SCOPE)
@@ -162,7 +162,8 @@ function(hunter_gate_detect_root)
   # Check HOME environment variable
   string(COMPARE NOTEQUAL "$ENV{HOME}" "" result)
   if(result)
-    set(HUNTER_GATE_ROOT "$ENV{HOME}/.hunter" PARENT_SCOPE)
+    message("--------------QAQ------------: $ENV{HOME} : ${CMAKE_SOURCE_DIR}/.hunter")
+    set(HUNTER_GATE_ROOT "${CMAKE_SOURCE_DIR}/.hunter" PARENT_SCOPE)
     hunter_gate_status_debug("HUNTER_ROOT set using HOME environment variable")
     return()
   endif()

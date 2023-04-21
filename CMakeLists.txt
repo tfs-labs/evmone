@@ -4,6 +4,10 @@
 
 cmake_minimum_required(VERSION 3.13)
 
+SET(CMAKE_BUILD_TYPE "Debug")  
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")  
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")  
+
 if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/evmc/.git)
     message(FATAL_ERROR "Git submodules not initialized, execute:\n  git submodule update --init")
 endif()
@@ -38,6 +42,8 @@ endif()
 
 hunter_add_package(ethash)
 find_package(ethash CONFIG REQUIRED)
+message(STATUS "CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
+message(STATUS "CMAKE_ROOT = ${CMAKE_ROOT}")
 
 option(EVMC_TOOLS "Build EVMC test tools" ${EVMONE_TESTING})
 option(EVMC_INSTALL "Install EVMC" OFF)

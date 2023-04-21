@@ -3,7 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "instructions.hpp"
-
+#include <evmc/hex.hpp>
+#include <iostream>
 namespace evmone::instr::core
 {
 template <evmc_opcode Op>
@@ -46,7 +47,6 @@ evmc_status_code call_impl(StackTop stack, ExecutionState& state) noexcept
     msg.sender = (Op == OP_DELEGATECALL) ? state.msg->sender : state.msg->recipient;
     msg.value =
         (Op == OP_DELEGATECALL) ? state.msg->value : intx::be::store<evmc::uint256be>(value);
-
     if (size_t(input_size) > 0)
     {
         msg.input_data = &state.memory[size_t(input_offset)];

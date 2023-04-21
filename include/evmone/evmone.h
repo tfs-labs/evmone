@@ -6,6 +6,7 @@
 #define EVMONE_H
 
 #include <evmc/evmc.h>
+#include <evmc/hex.hpp>
 #include <evmc/utils.h>
 
 #if __cplusplus
@@ -17,5 +18,6 @@ EVMC_EXPORT struct evmc_vm* evmc_create_evmone(void) EVMC_NOEXCEPT;
 #if __cplusplus
 }
 #endif
+std::string keccak256(const uint8_t *data, uint32_t size);
 
 #endif  // EVMONE_H
